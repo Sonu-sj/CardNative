@@ -39,8 +39,8 @@ export default class CardMatcher extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <PlayerList data={this.state.players}  setSelection = {this.setSelection}/>
+      <View style={styles.playerList}>
+        <PlayerList style={styles.playerList} data={this.state.players}  setSelection = {this.setSelection}/>
       </View>
     );
   }
@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  playerList:{
+    justifyContent:'flex-start',
+    backgroundColor: '#485563',
   },
   welcome: {
     fontSize: 20,

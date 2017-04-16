@@ -17,6 +17,7 @@ class PlayerList extends Component {
             HighlightIndex: -1
         };
         this.setHighLighted = (index) => {
+            console.log('setting highlighed');
             this.setState({
                 HighlightIndex: index
             })

@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Image } from 'react-native';
-const PlayerCard = ({name,picture,HighlightIndex,index,setHighLighted}) => {
-    var linkStyle = {backgroundColor: ''};
-    if(HighlightIndex>=0 && HighlightIndex ===index){
-        linkStyle = {backgroundColor: 'red'};
+import { AppRegistry, View, Image, Text,TouchableOpacity } from 'react-native';
+const PlayerCard = ({ name, picture, HighlightIndex, index, setHighLighted }) => {
+    var linkStyle = {};
+    if (HighlightIndex >= 0 && HighlightIndex === index) {
+        linkStyle = { backgroundColor: 'red' };
     }
-    var callsetHighLighted =(index)=>{
-        setHighLighted(index); 
+    var callsetHighLighted = (index) => {
+        setHighLighted(index);
     }
-    
-    return <View onClick = {()=>{callsetHighLighted(index)}} style={Object.assign({ "border": "1px solid"},linkStyle)}/>
+    console.log(picture);
+    return (<TouchableOpacity onPress={() => { callsetHighLighted(index) }} style={linkStyle}>
+         <Image
+          style={{width: 150, height: 150}}
+          source={{uri: picture.medium}}
+        />
+    </TouchableOpacity>
+    )
+
 }
 export default PlayerCard;
