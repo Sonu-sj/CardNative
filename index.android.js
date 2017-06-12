@@ -12,36 +12,16 @@ import {
   View
 } from 'react-native';
 
-import PlayerList from './src/PlayerList.js';
-import data from './src/source.js';
+import GameContainer from './src/containers/GameContainer';
 
 export default class CardMatcher extends Component {
     constructor(props) {
-    super(props)
-    this.state = {
-      players: data.results,
-      selectedPlayers: Array.from({ length: 10 })
-    }
-    this.selectedIndex = -1;
+      super(props);
   }
 
-  movePlayer = (destIndex) => {
-    // this.state.selectedPlayers.shift(this.state.players[sourceIndex]);
-    var selectedPlayer = this.state.players[this.selectedIndex];
-    this.state.selectedPlayers.splice(destIndex,1,selectedPlayer);
-    this.setState({
-      selectedPlayers: this.state.selectedPlayers
-    })
-  }
-
-  setSelection = (index) =>{
-    this.selectedIndex = index;
-  }
   render() {
     return (
-      <View style={styles.playerList}>
-        <PlayerList style={styles.playerList} data={this.state.players}  setSelection = {this.setSelection}/>
-      </View>
+    <GameContainer/>
     );
   }
 }
