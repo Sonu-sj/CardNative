@@ -18,16 +18,12 @@ export default class GameContainer extends Component {
     constructor(props) {
         super(props);
         this.store = configureStore();
-        this.state = {
-            Cards: [{},{},{},{}],
-            Level:1
-        }
     }
     render() {
         return (
             <Provider store={this.store}>
             <View style={styles.GameArea}>
-                <CardList Cards={this.state.Cards} />
+                <CardList/>
             </View>
             </Provider>
         );

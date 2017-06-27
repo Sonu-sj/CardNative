@@ -7,9 +7,6 @@ export default Card;
 const styles = StyleSheet.create({
     card: {
         width: 200, 
-        height: 200,
-        flexGrow:1,
-        marginRight:20,
-        marginBottom:20
+        height: 200
     }
 });

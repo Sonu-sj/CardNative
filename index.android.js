@@ -11,17 +11,22 @@ import {
   Text,
   View
 } from 'react-native';
+import {Provider} from 'react-redux';
 
 import GameContainer from './src/containers/GameContainer';
+import configureStore from './src/store/configureStore';
 
 export default class CardMatcher extends Component {
     constructor(props) {
       super(props);
+      this.store = configureStore();
   }
 
   render() {
     return (
+    <Provider store={this.store}>
     <GameContainer/>
+    </Provider>
     );
   }
 }
