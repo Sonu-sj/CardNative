@@ -34,7 +34,6 @@ export default class GameContainer extends Component {
 const styles = StyleSheet.create({
     GameArea: {
         flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flexWrap:'wrap'
     }
 });

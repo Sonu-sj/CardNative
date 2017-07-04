@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableOpacity,StyleSheet} from 'react-native';
+import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Card from '../components/Card.js';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as Actions from '../actions/actions';
 const CardList = (props) => {
-    console.log(props);
+    function handleClick(index, selCard) {
+        props.actions.cardClicked(index)
+        console.log(props)
+        if (props.state.Cards.shownCards > 1) {
+            if (props.state.Cards.currentCard.id === selCard.id) {
+                props.actions.cardMatched(selCard.id)
+            } else {
+                console.log('unmatched');
+                props.actions.cardUnMatched();
+            }
+        }
+    }
     return (
         <View style={styles.cardGrid}>
-       {props.state.Cards.Cards.map(() =>
-             <TouchableOpacity onPress = {props.actions.levelChanged} style={styles.cardTouch}>   
-                <Card />
-                 </TouchableOpacity>   
-                )}
-            
+            {props.state.Cards.Cards.map((card, index) =>
+                <TouchableOpacity onPress={() => handleClick(index, card)} style={styles.cardTouch}>
+                    <Card style={styles.cardTouch} {...card} />
+                </TouchableOpacity>
+            )}
+
         </View>
     )
 }
@@ -38,19 +49,20 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = StyleSheet.create({
     cardGrid: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
         flex: 1,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        flexWrap:'wrap'
+        borderRadius: 4,
+        borderWidth: 0.5,
+        borderColor: 'green'
     },
-    cardTouch:{
-        height: 200,
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-        marginRight:20,
-        marginBottom:20
+    cardTouch: {
+        flexGrow: 1,
+        flexShrink: 1,
+        marginRight: 100,
+        marginBottom: 20
     }
 });
 
