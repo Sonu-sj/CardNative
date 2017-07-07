@@ -7,13 +7,18 @@ import * as Actions from '../actions/actions';
 const CardList = (props) => {
     function handleClick(index, selCard) {
         props.actions.cardClicked(index)
-        console.log(props)
+        
         if (props.state.Cards.shownCards > 1) {
             if (props.state.Cards.currentCard.id === selCard.id) {
-                props.actions.cardMatched(selCard.id)
+                setTimeout(function(){
+                    props.actions.cardMatched(selCard.id)
+                },700)
+                
             } else {
-                console.log('unmatched');
-                props.actions.cardUnMatched();
+                setTimeout(function(){
+                   props.actions.cardUnMatched();  
+               },700)
+               
             }
         }
     }
