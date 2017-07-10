@@ -23,13 +23,12 @@ export default class GameContainer extends Component {
     }
     render() {
         return (
-            <Provider store={this.store}>
-            <Image source={{uri:placeholderUrl}} style={styles.container}>
+            // <Image source={{uri:placeholderUrl}} style={styles.container}>
             <View style={styles.GameArea}>
-                <CardList/>
+            <ScoreCard/>
+                <CardList/>              
             </View>
-            </Image>
-            </Provider>
+            // </Image>
         );
     }
 
@@ -38,7 +37,8 @@ export default class GameContainer extends Component {
 const styles = StyleSheet.create({
     GameArea: {
         flex:1,
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        alignItems:'flex-end'
     },
     container: {
     flex: 1,

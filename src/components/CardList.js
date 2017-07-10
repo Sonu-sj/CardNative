@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     cardTouch: {
         flexGrow: 1,
         flexShrink: 1,
-        marginRight: 100,
+        marginRight: 10,
         marginBottom: 20
     }
 });
