@@ -1,18 +1,23 @@
 import Source from '../source.js';
 
-var allCards = Source.results;
+var AllSource = Source;
+
+
 
 const initialState = {
-  Cards: generateCards(1),
+  Cards: [],
   shownCards: 0,
   currentCard: {},
   Level: 1,
-  Points:0
+  Points: 0
 }
 
-function generateCards(level) {
-  var shuffledCards = allCards.sort(() => .5 - Math.random());
-  let selectedCards = shuffledCards.slice(0, level * 2);
+function generateCards(level, Source = AllSource) {
+  console.log('generating cards')
+  console.log(Source)
+  var allCards = Source.results;
+  //var shuffledCards = allCards.sort(() => .5 - Math.random());
+  let selectedCards = allCards.slice(0, level * 2);
   selectedCards = [...selectedCards, ...selectedCards];
   selectedCards = selectedCards.map((card, index) => {
     return {
@@ -21,21 +26,29 @@ function generateCards(level) {
       shown: false
     }
   })
-  return selectedCards;
+  return selectedCards.sort(() => .5 - Math.random());
 }
 
 
-const secondState = {
-  Cards: generateCards(2),
-  shownCards: 0,
-  currentCard: {},
-  Level: 2
-}
 
 export default function cardReducer(state = initialState, action) {
+  console.log('action', action);
   switch (action.type) {
+
+    case 'CARDS_LOADED':
+      return Object.assign({}, state, {
+        Cards: generateCards(state.Level, action.results)
+      })
+    case 'UPDATE_LEVEL':
+      let nextState = {
+        Cards: generateCards(state.Level + 1,action.results),
+        shownCards: 0,
+        currentCard: {},
+        Level: state.Level + 1,
+        Points: state.Points + 5
+      }
+      return Object.assign({}, state, nextState)
     case 'CARD_CLICKED':
-      console.log(action);
       return Object.assign({}, state, {
         Cards: state.Cards.map((c, i) => {
           if (i != action.index)
@@ -46,21 +59,23 @@ export default function cardReducer(state = initialState, action) {
           shownCards: ++state.shownCards,
           currentCard: state.Cards[action.index]
         })
-    case 'LEVEL_CHANGED':
-      return Object.assign({}, secondState)
     case 'CARD_UNMATCHED':
-      console.log('unmatched reducer')
       return Object.assign({}, state, { Cards: state.Cards.map((c, i) => { return Object.assign({}, c, { shown: false }) }) }, { shownCards: 0 })
     case 'CARD_MATCHED':
+      console.log('card Matched');
       let filteredCards = state.Cards.filter((c, i) => {
         return action.id !== c.id
       });
       if (filteredCards.length > 0) {
         return Object.assign({}, state, {
-          Cards: filteredCards
-        },{Points:state.Points +5})
+          Cards: filteredCards,
+          Points: state.Points + 5
+        })
       } else {
-        return Object.assign({}, secondState)
+        let nextState = {
+          Cards: []
+        }
+        return Object.assign({}, state, nextState)
       }
 
     case 'HIDE_CARDS':

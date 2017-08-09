@@ -15,11 +15,12 @@ import {Provider} from 'react-redux';
 
 import GameContainer from './src/containers/GameContainer';
 import configureStore from './src/store/configureStore';
-
+import * as Actions from './src/actions/actions.js';
 export default class CardMatcher extends Component {
     constructor(props) {
       super(props);
       this.store = configureStore();
+      this.store.dispatch(Actions.loadCards(0))
   }
 
   render() {

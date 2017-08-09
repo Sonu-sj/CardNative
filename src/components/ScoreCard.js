@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Image, Text, TouchableOpacity } from 'react-native';
+import { AppRegistry, View, Image, Text, TouchableOpacity,StyleSheet} from 'react-native';
 import {connect,Provider} from 'react-redux';
 const ScoreCard = (props) => {
     console.log(props);
-    return (<Text>ScoreCard {props.state.Cards.Points}</Text>)
+    return (<View style={styles.ScoreContainer}><Text>ScoreCard {props.state.Cards.Points} Level {props.state.Cards.Level}</Text></View>)
 }
 
 const mapStateToProps = (state) => ({
@@ -13,3 +13,9 @@ const mapStateToProps = (state) => ({
 export default connect(
     mapStateToProps
 )(ScoreCard);
+
+const styles = StyleSheet.create({
+ScoreContainer:{
+    backgroundColor:'white'
+}
+});

@@ -19,16 +19,16 @@ var placeholderUrl = 'http://lorempixel.com/400/200/nature/';
 export default class GameContainer extends Component {
     constructor(props) {
         super(props);
-        this.store = configureStore();
+       // this.store = configureStore();
     }
     render() {
         return (
-            // <Image source={{uri:placeholderUrl}} style={styles.container}>
+            <Image source={{uri:placeholderUrl}} style={styles.container}>
             <View style={styles.GameArea}>
             <ScoreCard/>
                 <CardList/>              
             </View>
-            // </Image>
+             </Image>
         );
     }
 

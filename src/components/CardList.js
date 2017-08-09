@@ -5,19 +5,23 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/actions';
 const CardList = (props) => {
+    if(props.state.Cards.Cards.length==0 && props.state.Cards.Points>0){
+   props.actions.loadCards();
+    }
     function handleClick(index, selCard) {
+        console.log(props)
         props.actions.cardClicked(index)
         
         if (props.state.Cards.shownCards > 1) {
             if (props.state.Cards.currentCard.id === selCard.id) {
                 setTimeout(function(){
                     props.actions.cardMatched(selCard.id)
-                },700)
+                },0)
                 
             } else {
                 setTimeout(function(){
                    props.actions.cardUnMatched();  
-               },700)
+               },0)
                
             }
         }
