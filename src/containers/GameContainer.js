@@ -12,9 +12,9 @@ import ScoreCard from '../components/ScoreCard.js';
 import Timer from '../components/Timer.js';
 import {connect,Provider} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import configureStore from '../store/configureStore';
+// import configureStore from '../store/configureStore';
 // import {Provider} from 'react-redux';
-var placeholderUrl = 'http://lorempixel.com/400/200/nature/';
+var placeholderUrl = require('../images/Zinc.jpg');
 
 export default class GameContainer extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class GameContainer extends Component {
     }
     render() {
         return (
-            <Image source={{uri:placeholderUrl}} style={styles.container}>
+            <Image source={placeholderUrl} style={styles.container}>
             <View style={styles.GameArea}>
             <ScoreCard/>
                 <CardList/>              
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     GameArea: {
         flex:1,
         flexWrap:'wrap',
-        alignItems:'flex-end'
+        alignItems:'center'
     },
     container: {
     flex: 1,

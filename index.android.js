@@ -14,7 +14,7 @@ import {
 import {Provider} from 'react-redux';
 
 import GameContainer from './src/containers/GameContainer';
-import configureStore from './src/store/configureStore';
+import configureStore from './store/configureStore';
 import * as Actions from './src/actions/actions.js';
 export default class CardMatcher extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class CardMatcher extends Component {
   render() {
     return (
     <Provider store={this.store}>
-    <GameContainer/>
+    <GameContainer style={styles.container}/>
     </Provider>
     );
   }

@@ -30,7 +30,7 @@ const CardList = (props) => {
         <View style={styles.cardGrid}>
             {props.state.Cards.Cards.map((card, index) =>
                 <TouchableOpacity onPress={() => handleClick(index, card)} style={styles.cardTouch}>
-                    <Card style={styles.cardTouch} {...card} />
+                    <Card {...card} />
                 </TouchableOpacity>
             )}
 
@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 4,
         borderWidth: 0.5,
-        borderColor: 'green'
+        borderColor: 'green',
+        alignContent:'space-between'
     },
     cardTouch: {
-        flexGrow: 1,
         flexShrink: 1,
         marginRight: 10,
         marginBottom: 20
