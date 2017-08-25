@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderWidth: 0.5,
         borderColor: 'green',
-        alignContent:'space-between'
+        alignContent:'space-around',
+        maxHeight:800
     },
     cardTouch: {
         flexShrink: 1,
