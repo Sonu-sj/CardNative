@@ -9,7 +9,8 @@ const initialState = {
   shownCards: 0,
   currentCard: {},
   Level: 1,
-  Points: 0
+  Points: 0,
+  matchedCards:0
 }
 
 function generateCards(level, Source = AllSource) {
@@ -23,7 +24,8 @@ function generateCards(level, Source = AllSource) {
     return {
       id: card.email,
       src: card.picture.large,
-      shown: false
+      shown: false,
+      active:true
     }
   })
   return selectedCards.sort(() => .5 - Math.random());
@@ -32,7 +34,6 @@ function generateCards(level, Source = AllSource) {
 
 
 export default function cardReducer(state = initialState, action) {
-  console.log('action', action);
   switch (action.type) {
 
     case 'CARDS_LOADED':
@@ -45,7 +46,8 @@ export default function cardReducer(state = initialState, action) {
         shownCards: 0,
         currentCard: {},
         Level: state.Level + 1,
-        Points: state.Points + 5
+        Points: state.Points + 5,
+        matchedCards:0
       }
       return Object.assign({}, state, nextState)
     case 'CARD_CLICKED':
@@ -62,14 +64,25 @@ export default function cardReducer(state = initialState, action) {
     case 'CARD_UNMATCHED':
       return Object.assign({}, state, { Cards: state.Cards.map((c, i) => { return Object.assign({}, c, { shown: false }) }) }, { shownCards: 0 })
     case 'CARD_MATCHED':
-      console.log('card Matched');
-      let filteredCards = state.Cards.filter((c, i) => {
-        return action.id !== c.id
+      // let filteredCards = state.Cards.filter((c, i) => {
+      //   return action.id !== c.id
+      // });
+      let filteredCards = state.Cards.map((c, i) => {
+        if(action.id!=c.id){
+          //dont change anything if not a match
+          return c;
+        }else{
+          //make the card inactive
+          return Object.assign({},c,{
+            active:false
+          })
+        }
       });
       if (filteredCards.length > 0) {
         return Object.assign({}, state, {
           Cards: filteredCards,
-          Points: state.Points + 5
+          Points: state.Points + 5,
+          matchedCards:state.matchedCards +2
         })
       } else {
         let nextState = {

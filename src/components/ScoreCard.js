@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Image, Text, TouchableOpacity,StyleSheet} from 'react-native';
 import {connect,Provider} from 'react-redux';
 const ScoreCard = (props) => {
-    console.log(props);
-    return (<View style={styles.ScoreContainer}><Text>ScoreCard {props.state.Cards.Points} Level {props.state.Cards.Level}</Text></View>)
+    return (<View style={styles.ScoreContainer}><Text>ScoreCard {props.state.Cards.Points} Level {props.state.Cards.Level} Cards {props.state.Cards.Cards.length}</Text></View>)
 }
 
 const mapStateToProps = (state) => ({

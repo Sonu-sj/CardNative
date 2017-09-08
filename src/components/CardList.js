@@ -8,21 +8,29 @@ const CardList = (props) => {
     if(props.state.Cards.Cards.length==0 && props.state.Cards.Points>0){
    props.actions.loadCards();
     }
+    if(props.state.Cards.matchedCards>0 && props.state.Cards.matchedCards == props.state.Cards.Cards.length){
+        alert('loading')
+        props.actions.loadCards();
+    }
+    console.log(props.state.Cards.matchedCards);
+    console.log(props.state.Cards.Cards.length);
     function handleClick(index, selCard) {
-        console.log(props)
-        props.actions.cardClicked(index)
-        
-        if (props.state.Cards.shownCards > 1) {
-            if (props.state.Cards.currentCard.id === selCard.id) {
-                setTimeout(function(){
-                    props.actions.cardMatched(selCard.id)
-                },0)
-                
-            } else {
-                setTimeout(function(){
-                   props.actions.cardUnMatched();  
-               },0)
-               
+        if(selCard.active){
+            console.log(props)
+            props.actions.cardClicked(index)
+            
+            if (props.state.Cards.shownCards > 1) {
+                if (props.state.Cards.currentCard.id === selCard.id) {
+                    setTimeout(function(){
+                        props.actions.cardMatched(selCard.id)
+                    },0)
+                    
+                } else {
+                    setTimeout(function(){
+                       props.actions.cardUnMatched();  
+                   },0)
+                   
+                }
             }
         }
     }
@@ -67,7 +75,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'green',
         alignContent:'space-around',
-        maxHeight:800
+        maxHeight:700
     },
     cardTouch: {
         flexShrink: 1,
