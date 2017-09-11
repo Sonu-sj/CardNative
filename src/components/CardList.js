@@ -4,17 +4,25 @@ import Card from '../components/Card.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/actions';
+import { LayoutAnimation } from 'react-native';
 const CardList = (props) => {
+    
     if(props.state.Cards.Cards.length==0 && props.state.Cards.Points>0){
    props.actions.loadCards();
     }
     if(props.state.Cards.matchedCards>0 && props.state.Cards.matchedCards == props.state.Cards.Cards.length){
-        alert('loading')
         props.actions.loadCards();
     }
-    console.log(props.state.Cards.matchedCards);
-    console.log(props.state.Cards.Cards.length);
     function handleClick(index, selCard) {
+        const CustomLayoutAnimation = {
+            duration: 1000,
+            update: {
+              type: LayoutAnimation.Types.spring,
+              property: LayoutAnimation.Properties.opacity
+            }
+          };
+        console.log('start anim')
+        LayoutAnimation.configureNext(CustomLayoutAnimation);
         if(selCard.active){
             console.log(props)
             props.actions.cardClicked(index)
@@ -37,7 +45,7 @@ const CardList = (props) => {
     return (
         <View style={styles.cardGrid}>
             {props.state.Cards.Cards.map((card, index) =>
-                <TouchableOpacity onPress={() => handleClick(index, card)} style={styles.cardTouch}>
+                <TouchableOpacity onPress={() => handleClick(index, card)} style={styles.cardTouch} key={index}>
                     <Card {...card} />
                 </TouchableOpacity>
             )}

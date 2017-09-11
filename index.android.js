@@ -5,6 +5,8 @@
  */
 
 import React, { Component } from 'react';
+import { UIManager } from 'react-native'
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 import {
   AppRegistry,
   StyleSheet,

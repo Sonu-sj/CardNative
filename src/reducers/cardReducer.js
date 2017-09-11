@@ -51,7 +51,7 @@ export default function cardReducer(state = initialState, action) {
       }
       return Object.assign({}, state, nextState)
     case 'CARD_CLICKED':
-      return Object.assign({}, state, {
+      var cardObj =  Object.assign({}, state, {
         Cards: state.Cards.map((c, i) => {
           if (i != action.index)
             return c
@@ -61,6 +61,9 @@ export default function cardReducer(state = initialState, action) {
           shownCards: ++state.shownCards,
           currentCard: state.Cards[action.index]
         })
+        
+        cardObj.Cards = [...cardObj.Cards,...cardObj.Cards]
+        return cardObj
     case 'CARD_UNMATCHED':
       return Object.assign({}, state, { Cards: state.Cards.map((c, i) => { return Object.assign({}, c, { shown: false }) }) }, { shownCards: 0 })
     case 'CARD_MATCHED':
